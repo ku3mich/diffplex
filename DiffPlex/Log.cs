@@ -13,7 +13,11 @@ namespace DiffPlex
         [Conditional("LOG")]
         public static void Write(string format, params object[] args)
         {
-            // not implemented
+#if !NETSTANDARD1_0
+            Debug.Write(string.Format(format, args));
+#else
+            Debug.WriteLine(string.Format(format, args));
+#endif
         }
     }
 }
